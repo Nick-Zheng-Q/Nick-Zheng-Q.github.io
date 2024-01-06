@@ -59,7 +59,7 @@ plugins:
 
 author:
   name   : "Nick Zheng"
-  avatar : "/assets/images/bio-photo.jpg"
+  avatar : "/assets/images/bio-photo.png"
   bio    : "A student in Fudan University, studying chip design"
   links:
     - label: "GitHub"
