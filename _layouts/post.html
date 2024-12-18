@@ -12,13 +12,28 @@ layout: default
 <article>
     <div class="container">
         <div class="row">
+            <!-- Category Sidebar -->
+            <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container category-container">
+                <div class="category-sidebar">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="category-toggle" href="#">CATEGORIES</a>
+                    </h5>
+                    <ul class="category-nav">
+                        {% assign categories = site.posts | map: "category" | uniq %}
+                        {% for category in categories %}
+                        <li class="category-item {% if page.category == category %}active{% endif %}">
+                            <a href="/categories/{{ category }}">
+                                {{ category }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
 
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-10 col-md-offset-1
-                post-container">
-
+            <!-- Post Container -->
+            <div class="col-lg-6 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
                 <!-- Multi-Lingual -->
                 {% if page.multilingual %}
                     {% include multilingual-sel.html %}
@@ -174,3 +189,67 @@ layout: default
     }
 </style>
 {% endif %}
+
+<!-- 添加收缩功能的 JavaScript -->
+<script>
+    $(document).ready(function() {
+        // 初始状态设置
+        let categoryOpen = true;
+        
+        // 切换分类导航栏
+        $(".category-toggle").click(function(e) {
+            e.preventDefault();
+            if(categoryOpen) {
+                $(".category-nav").slideUp();
+                $(".category-container").addClass("collapsed");
+            } else {
+                $(".category-nav").slideDown();
+                $(".category-container").removeClass("collapsed");
+            }
+            categoryOpen = !categoryOpen;
+        });
+    });
+</script>
+
+<!-- 添加样式 -->
+<style>
+    .category-container {
+        transition: all 0.3s ease;
+        padding: 20px;
+    }
+    
+    .category-container.collapsed {
+        width: 50px;
+    }
+    
+    .category-nav {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .category-item {
+        padding: 5px 0;
+    }
+    
+    .category-item.active a {
+        color: #337ab7;
+        font-weight: bold;
+    }
+    
+    .category-toggle {
+        color: #777;
+        text-decoration: none;
+    }
+    
+    .category-toggle:hover {
+        color: #337ab7;
+        text-decoration: none;
+    }
+
+    /* 响应式布局调整 */
+    @media (max-width: 1200px) {
+        .category-container {
+            display: none;
+        }
+    }
+</style>

@@ -139,5 +139,21 @@ https://github.com/kitian616/jekyll-TeXt-theme
       tagSelect($(this).data('encode'), $(this));
     });
 
+    function handleCategoryFilter() {
+        $('.js-categories').on('click', '.category-button', function() {
+            $this = $(this);
+            // 同样的过滤逻辑，但是针对 category
+            const category = $this.data('encode');
+            if (category) {
+                $('.js-result .item').hide();
+                $(`.js-result .item[data-category="${category}"]`).fadeIn();
+            } else {
+                $('.js-result .item').fadeIn();
+            }
+        });
+    }
+
+    handleCategoryFilter();
+
   });
 })();

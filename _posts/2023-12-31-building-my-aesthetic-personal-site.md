@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Building My Aesthetic Personal Site 📝"
+category: "Technical"
 subtitle: "with a custom Catppuccin Jekyll theme 😺"
 author: "HynDuf"
 header-style: text
