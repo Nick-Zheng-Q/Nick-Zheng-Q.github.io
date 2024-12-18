@@ -18,44 +18,50 @@ https://github.com/kitian616/jekyll-TeXt-theme
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<!-- Categories (as filter) -->
-			<div id='category_cloud' class="categories categories-sup js-categories">
-				<a class="category-button--all" data-encode="">
-					Show All
-					<sup>{{site.posts.size}}</sup>
-				</a>
-
-				{% assign categories = site.posts | map: "category" | uniq %}
-				{% for category in categories %}
-					{% assign category_posts = site.posts | where: "category", category %}
-					<a data-sort="{{ site.posts.size | minus: category_posts.size | prepend: '0000' | slice: -4, 4 }}"
-						data-encode="{{ category | strip | url_encode }}" 
-						class="category-button" 
-						title="{{ category }}"
-						rel="{{ category_posts.size }}">
-						{{ category }}
-						<sup>{{ category_posts.size }}</sup>
+			<div class="filter-section">
+				<h5>CATEGORIES</h5>
+				<div id='category_cloud' class="categories categories-sup js-categories">
+					<a class="category-button--all" data-encode="">
+						Show All
+						<sup>{{site.posts.size}}</sup>
 					</a>
-				{% endfor %}
+
+					{% assign categories = site.posts | map: "category" | uniq %}
+					{% for category in categories %}
+						{% assign category_posts = site.posts | where: "category", category %}
+						<a data-sort="{{ site.posts.size | minus: category_posts.size | prepend: '0000' | slice: -4, 4 }}"
+							data-encode="{{ category | strip | url_encode }}" 
+							class="category-button" 
+							title="{{ category }}"
+							rel="{{ category_posts.size }}">
+							{{ category }}
+							<sup>{{ category_posts.size }}</sup>
+						</a>
+					{% endfor %}
+				</div>
 			</div>
 
-			<!-- Original Tags Cloud -->
-			<div id='tag_cloud' class="tags tags-sup js-tags">
-				<a class="tag-button--all" data-encode="">
-					Show All
-					<sup>{{site.posts.size}}</sup>
-				</a>
+			<!-- Tags (as filter) -->
+			<div class="filter-section">
+				<h5>TAGS</h5>
+				<div id='tag_cloud' class="tags tags-sup js-tags">
+					<a class="tag-button--all" data-encode="">
+						Show All
+						<sup>{{site.posts.size}}</sup>
+					</a>
 
-				{% capture tags %}
-				{% for tag in site.tags %}
-				<a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
-					data-encode="{{ tag[0] | strip | url_encode }}" class="tag-button" title="{{ tag[0] }}"
-					rel="{{ tag[1].size }}">
-					{{ tag[0] }}
-					<sup>{{tag[1].size}}</sup>
-				</a>__SEPERATOR__
-				{% endfor %}
-				{% endcapture %}
-				{{ tags | split:'__SEPERATOR__' | sort }}
+					{% capture tags %}
+					{% for tag in site.tags %}
+					<a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
+						data-encode="{{ tag[0] | strip | url_encode }}" class="tag-button" title="{{ tag[0] }}"
+						rel="{{ tag[1].size }}">
+						{{ tag[0] }}
+						<sup>{{tag[1].size}}</sup>
+					</a>__SEPERATOR__
+					{% endfor %}
+					{% endcapture %}
+					{{ tags | split:'__SEPERATOR__' | sort }}
+				</div>
 			</div>
 
 			<!-- Article List -->
@@ -107,3 +113,55 @@ https://github.com/kitian616/jekyll-TeXt-theme
 		</div>
 	</div>
 </div>
+
+<!-- 添加样式 -->
+<style>
+	.filter-section {
+		margin-bottom: 30px;
+		padding: 20px;
+		background: var(--ctp-surface0);
+		border-radius: 8px;
+	}
+
+	.filter-section h5 {
+		margin-top: 0;
+		margin-bottom: 15px;
+		color: var(--ctp-subtext0);
+		font-weight: 600;
+	}
+
+	/* Categories 样式 */
+	.categories {
+		margin: 0;
+	}
+
+	.category-button,
+	.category-button--all {
+		background: var(--ctp-surface1);
+		padding: 4px 10px;
+		margin: 4px;
+		border-radius: 15px;
+		color: var(--ctp-text);
+		text-decoration: none;
+		display: inline-block;
+		transition: all 0.3s ease;
+	}
+
+	.category-button:hover,
+	.category-button--all:hover {
+		background: var(--ctp-blue);
+		color: var(--ctp-base);
+		text-decoration: none;
+	}
+
+	.category-button sup,
+	.category-button--all sup {
+		margin-left: 3px;
+		color: var(--ctp-subtext1);
+	}
+
+	/* 保持原有的 Tags 样式不变 */
+	#tag_cloud {
+		margin-top: 0;
+	}
+</style>
