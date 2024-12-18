@@ -37,9 +37,69 @@ https://github.com/kitian616/jekyll-TeXt-theme
   })();
 
   $(document).ready(function() {
-    var $tags = $('.js-tags');
-    var $articleTags = $tags.find('.tag-button');
-    var $tagShowAll = $tags.find('.tag-button--all');
+    var $tags = document.querySelector('#tag_cloud');
+    var $categories = document.querySelector('#category_cloud');
+    var tags = $tags.getElementsByClassName('tag-button');
+    var categories = $categories.getElementsByClassName('tag-button');
+
+    // Init button style
+    function initTagsAndCategories() {
+        Array.prototype.forEach.call(tags, (tag) => {
+            tag.style.backgroundColor = "#f8f9fa";
+            tag.style.color = "#8839ef";
+            tag.onmouseover = function() {
+                this.style.backgroundColor = "#8839ef";
+                this.style.color = "#f8f9fa";
+            };
+            tag.onmouseout = function() {
+                this.style.backgroundColor = "#f8f9fa";
+                this.style.color = "#8839ef";
+            };
+        });
+
+        Array.prototype.forEach.call(categories, (category) => {
+            category.style.backgroundColor = "#f8f9fa";
+            category.style.color = "#8839ef";
+            category.onmouseover = function() {
+                this.style.backgroundColor = "#8839ef";
+                this.style.color = "#f8f9fa";
+            };
+            category.onmouseout = function() {
+                this.style.backgroundColor = "#f8f9fa";
+                this.style.color = "#8839ef";
+            };
+        });
+    }
+    initTagsAndCategories();
+
+    function filter(type) {
+        var tagExp = new RegExp(type.getAttribute('data-encode'));
+        var items = type === 'category' ? categories : tags;
+
+        Array.prototype.forEach.call(items, function(item) {
+            if (item.getAttribute('data-encode').search(tagExp) !== -1) {
+                item.style.display = 'inline';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Click handlers
+    Array.prototype.forEach.call(tags, function(tag) {
+        tag.addEventListener('click', function(e) {
+            e.preventDefault();
+            filter(this);
+        }, false);
+    });
+
+    Array.prototype.forEach.call(categories, function(category) {
+        category.addEventListener('click', function(e) {
+            e.preventDefault();
+            filter(this);
+        }, false);
+    });
+
     var $result = $('.js-result');
     var $sections = $result.find('section');
     var sectionArticles = []
