@@ -26,15 +26,15 @@ https://github.com/kitian616/jekyll-TeXt-theme
 
 				{% assign categories = site.posts | map: "category" | uniq %}
 				{% for category in categories %}
-				<a data-sort="{{ site.posts.size | minus: site[1].size | prepend: '0000' | slice: -4, 4 }}"
-					data-encode="{{ category | strip | url_encode }}" 
-					class="category-button" 
-					title="{{ category }}"
-					rel="{{ site[1].size }}">
-					{{ category }}
-					{% assign posts = site.posts | where: "category", category %}
-					<sup>{{posts.size}}</sup>
-				</a>
+					{% assign category_posts = site.posts | where: "category", category %}
+					<a data-sort="{{ site.posts.size | minus: category_posts.size | prepend: '0000' | slice: -4, 4 }}"
+						data-encode="{{ category | strip | url_encode }}" 
+						class="category-button" 
+						title="{{ category }}"
+						rel="{{ category_posts.size }}">
+						{{ category }}
+						<sup>{{ category_posts.size }}</sup>
+					</a>
 				{% endfor %}
 			</div>
 
