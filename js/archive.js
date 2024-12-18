@@ -2,218 +2,77 @@
 Credits: this script is shamelessly borrowed from
 https://github.com/kitian616/jekyll-TeXt-theme
 */
-(function() {
-  function queryString() {
-    // This function is anonymous, is executed immediately and
-    // the return value is assigned to QueryString!
-    var i = 0, queryObj = {}, pair;
-    var queryStr = window.location.search.substring(1);
-    var queryArr = queryStr.split('&');
-    for (i = 0; i < queryArr.length; i++) {
-      pair = queryArr[i].split('=');
-      // If first entry with this name
-      if (typeof queryObj[pair[0]] === 'undefined') {
-        queryObj[pair[0]] = pair[1];
-        // If second entry with this name
-      } else if (typeof queryObj[pair[0]] === 'string') {
-        queryObj[pair[0]] = [queryObj[pair[0]], pair[1]];
-        // If third or later entry with this name
-      } else {
-        queryObj[pair[0]].push(pair[1]);
-      }
-    }
-    return queryObj;
-  }
+$(document).ready(function() {
+    var $tagCloud = document.getElementById('tag_cloud');
+    var $categoryCloud = document.getElementById('category_cloud');
+    var $articleList = document.querySelector('.mini-post-list');
+    var $result = document.querySelector('.js-result');
 
-  var setUrlQuery = (function() {
-    var baseUrl =  window.location.href.split('?')[0];
-    return function(query) {
-      if (typeof query === 'string') {
-        window.history.replaceState(null, '', baseUrl + query);
-      } else {
-        window.history.replaceState(null, '', baseUrl);
-      }
-    };
-  })();
-
-  $(document).ready(function() {
-    var $tags = document.querySelector('#tag_cloud');
-    var $categories = document.querySelector('#category_cloud');
-    var tags = $tags.getElementsByClassName('tag-button');
-    var categories = $categories.getElementsByClassName('tag-button');
-
-    // Init button style
-    function initTagsAndCategories() {
-        Array.prototype.forEach.call(tags, (tag) => {
-            tag.style.backgroundColor = "#f8f9fa";
-            tag.style.color = "#8839ef";
-            tag.onmouseover = function() {
+    // 初始化标签和分类按钮
+    function initButtons(container, type) {
+        if (!container) return;
+        
+        var buttons = container.getElementsByTagName('a');
+        Array.prototype.forEach.call(buttons, function(button) {
+            button.style.backgroundColor = "#f8f9fa";
+            button.style.color = "#8839ef";
+            button.onmouseover = function() {
                 this.style.backgroundColor = "#8839ef";
                 this.style.color = "#f8f9fa";
             };
-            tag.onmouseout = function() {
-                this.style.backgroundColor = "#f8f9fa";
-                this.style.color = "#8839ef";
-            };
-        });
-
-        Array.prototype.forEach.call(categories, (category) => {
-            category.style.backgroundColor = "#f8f9fa";
-            category.style.color = "#8839ef";
-            category.onmouseover = function() {
-                this.style.backgroundColor = "#8839ef";
-                this.style.color = "#f8f9fa";
-            };
-            category.onmouseout = function() {
+            button.onmouseout = function() {
                 this.style.backgroundColor = "#f8f9fa";
                 this.style.color = "#8839ef";
             };
         });
     }
-    initTagsAndCategories();
 
-    function filter(type) {
-        var tagExp = new RegExp(type.getAttribute('data-encode'));
-        var items = type === 'category' ? categories : tags;
-
-        Array.prototype.forEach.call(items, function(item) {
-            if (item.getAttribute('data-encode').search(tagExp) !== -1) {
-                item.style.display = 'inline';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    // Click handlers
-    Array.prototype.forEach.call(tags, function(tag) {
-        tag.addEventListener('click', function(e) {
-            e.preventDefault();
-            filter(this);
-        }, false);
-    });
-
-    Array.prototype.forEach.call(categories, function(category) {
-        category.addEventListener('click', function(e) {
-            e.preventDefault();
-            filter(this);
-        }, false);
-    });
-
-    var $result = $('.js-result');
-    var $sections = $result.find('section');
-    var sectionArticles = []
-    var $lastFocusButton = null;
-    var sectionTopArticleIndex = [];
-    var hasInit = false;
-
-    $sections.each(function() {
-      sectionArticles.push($(this).find('.item'));
-    });
-
-    function init() {
-      var i, index = 0;
-      for (i = 0; i < $sections.length; i++) {
-        sectionTopArticleIndex.push(index);
-        index += $sections.eq(i).find('.item').length;
-      }
-      sectionTopArticleIndex.push(index);
-    }
-
-    function searchButtonsByTag(_tag/*raw tag*/) {
-      if (!_tag) {
-        return $tagShowAll;
-      }
-      var _buttons = $articleTags.filter('[data-encode="' + _tag + '"]');
-      if (_buttons.length === 0) {
-        return $tagShowAll;
-      }
-      return _buttons;
-    }
-
-    function buttonFocus(target) {
-      if (target) {
-        target.addClass('focus');
-        $lastFocusButton && !$lastFocusButton.is(target) && $lastFocusButton.removeClass('focus');
-        $lastFocusButton = target;
-      }
-    }
-
-    function tagSelect (tag/*raw tag*/, target) {
-      var result = {}, $articles;
-      var i, j, k, _tag;
-
-      for (i = 0; i < sectionArticles.length; i++) {
-        $articles = sectionArticles[i];
-        for (j = 0; j < $articles.length; j++) {
-          if (tag === '' || tag === undefined) {
-            result[i] || (result[i] = {});
-            result[i][j] = true;
-          } else {
-            var tags = $articles.eq(j).data('tags').split(',');
-            for (k = 0; k < tags.length; k++) {
-              if (tags[k] === tag) {
-                result[i] || (result[i] = {});
-                result[i][j] = true; break;
-              }
-            }
-          }
-        }
-      }
-
-      for (i = 0; i < sectionArticles.length; i++) {
-        result[i] && $sections.eq(i).removeClass('d-none');
-        result[i] || $sections.eq(i).addClass('d-none');
-        for (j = 0; j < sectionArticles[i].length; j++) {
-          if (result[i] && result[i][j]) {
-            sectionArticles[i].eq(j).removeClass('d-none');
-          } else {
-            sectionArticles[i].eq(j).addClass('d-none');
-          }
-        }
-      }
-
-      hasInit || ($result.removeClass('d-none'), hasInit = true);
-
-
-      if (target) {
-        buttonFocus(target);
-        _tag = target.attr('data-encode');
-        if (_tag === '' || typeof _tag !== 'string') {
-          setUrlQuery();
+    // 过滤文章
+    function filterPosts(type, encode) {
+        var articles = $result.getElementsByClassName('item');
+        
+        if (encode === '') {
+            // Show All
+            Array.prototype.forEach.call(articles, function(article) {
+                article.style.display = 'block';
+            });
         } else {
-          setUrlQuery('?tag=' + _tag);
+            Array.prototype.forEach.call(articles, function(article) {
+                var dataAttr = type === 'tag' ? article.getAttribute('data-tags') : article.getAttribute('data-category');
+                if (dataAttr && dataAttr.indexOf(encode) !== -1) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
         }
-      } else {
-        buttonFocus(searchButtonsByTag(tag));
-      }
     }
 
-    var query = queryString(), 
-        _tag = query.tag;
+    // 初始化
+    initButtons($tagCloud, 'tag');
+    initButtons($categoryCloud, 'category');
 
-    init(); 
-    tagSelect(_tag);
-
-    $tags.on('click', 'a', function() {   /* only change */
-      tagSelect($(this).data('encode'), $(this));
-    });
-
-    function handleCategoryFilter() {
-        $('.js-categories').on('click', '.category-button', function() {
-            $this = $(this);
-            // 同样的过滤逻辑，但是针对 category
-            const category = $this.data('encode');
-            if (category) {
-                $('.js-result .item').hide();
-                $(`.js-result .item[data-category="${category}"]`).fadeIn();
-            } else {
-                $('.js-result .item').fadeIn();
-            }
+    // 标签点击事件
+    if ($tagCloud) {
+        var tagButtons = $tagCloud.getElementsByTagName('a');
+        Array.prototype.forEach.call(tagButtons, function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                var encode = this.getAttribute('data-encode') || '';
+                filterPosts('tag', encode);
+            });
         });
     }
 
-    handleCategoryFilter();
-
-  });
-})();
+    // 分类点击事件
+    if ($categoryCloud) {
+        var categoryButtons = $categoryCloud.getElementsByTagName('a');
+        Array.prototype.forEach.call(categoryButtons, function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                var encode = this.getAttribute('data-encode') || '';
+                filterPosts('category', encode);
+            });
+        });
+    }
+});
