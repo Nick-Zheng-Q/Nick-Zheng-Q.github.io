@@ -220,11 +220,13 @@ layout: default
 <style>
     .category-container {
         transition: all 0.3s ease;
-        padding: 10px;
+        padding: 10px 10px 10px 0;
+        margin-left: -15px;
     }
     
     .category-container.collapsed {
         width: 20px;
+        margin-left: -5px;
     }
     
     .category-nav {
@@ -233,15 +235,14 @@ layout: default
     }
     
     .current-category h6 {
-        color: var(--accent-color);
-        font-weight: bold;
-        margin: 10px 0;
-        font-size: 14px;
+        font-size: 11px;
+        margin: 5px 0;
+        padding-left: 5px;
     }
     
     .current-category ul {
         list-style: none;
-        padding-left: 8px;
+        padding-left: 5px;
         margin: 0;
     }
     
