@@ -297,4 +297,27 @@ layout: default
         max-width: 100%;  /* 允许内容占用更多宽度 */
         padding-right: 15px;  /* 保持一个小的右侧间距 */
     }
+    
+    /* 调整文章内容宽度 */
+    article .container {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .post-container {
+        padding-right: 0;
+    }
+    
+    /* 让文字内容区域尽可能宽 */
+    .post-container p,
+    .post-container h1,
+    .post-container h2,
+    .post-container h3,
+    .post-container h4,
+    .post-container h5,
+    .post-container ul,
+    .post-container ol {
+        width: 100%;
+        max-width: none;
+    }
 </style>
