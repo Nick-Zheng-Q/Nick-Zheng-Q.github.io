@@ -1809,7 +1809,9 @@ img::-moz-selection {
   box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.239216) 0 1px 4px;
 }
 #tag_cloud a.tag-button--all,
-#tag_cloud .tag.tag-button--all {
+#tag_cloud .tag.tag-button--all,
+#category_cloud a.tag-button--all,
+#category_cloud .tag.tag-button--all {
   font-weight: 700;
   color: var(--accent-color-deep) !important;
 }
@@ -1818,7 +1820,13 @@ img::-moz-selection {
 #tag_cloud a.tag-button--all:active,
 #tag_cloud .tag.tag-button--all:active,
 #tag_cloud a.tag-button--all.focus,
-#tag_cloud .tag.tag-button--all.focus {
+#tag_cloud .tag.tag-button--all.focus,
+#category_cloud a.tag-button--all:hover,
+#category_cloud .tag.tag-button--all:hover,
+#category_cloud a.tag-button--all:active,
+#category_cloud .tag.tag-button--all:active,
+#category_cloud a.tag-button--all.focus,
+#category_cloud .tag.tag-button--all.focus {
   color: var(--accent-color) !important;
   background-color: var(--crust-background-color) !important;
 }
