@@ -29,6 +29,7 @@ https://github.com/kitian616/jekyll-TeXt-theme
 					{% assign category_posts = site.posts | where: "category", category %}
 					<a class="tag-button"
 						data-encode="{{ category | strip | url_encode }}"
+						data-category="{{ category }}"
 						rel="{{ category_posts.size }}">
 						{{ category }}
 						<sup>{{ category_posts.size }}</sup>
@@ -85,7 +86,9 @@ https://github.com/kitian616/jekyll-TeXt-theme
 				{%- assign _date = _currentdate -%}
 				{%- endif -%}
 
-				<div class="post-preview item" data-tags="{{ _tags }}" data-category="{{ _article.category }}">
+				<div class="post-preview item" 
+					data-tags="{{ _tags }}" 
+					data-category="{{ _article.category | strip | url_encode }}">
 					<a href="{{ _article.url | prepend: site.baseurl }}">
 						<h2 class="post-title">
 							{{ _article.title }}
