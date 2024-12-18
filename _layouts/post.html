@@ -287,4 +287,14 @@ layout: default
             display: none;
         }
     }
+    
+    .post-container {
+        padding-right: 0;  /* 减少右侧内边距 */
+    }
+    
+    /* 确保文字内容区域更宽 */
+    .post-container > * {
+        max-width: 100%;  /* 允许内容占用更多宽度 */
+        padding-right: 15px;  /* 保持一个小的右侧间距 */
+    }
 </style>
