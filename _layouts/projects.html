@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<div class="container">
+    <div class="row">
+        {% for project in site.projects %}
+        <div class="col-md-4 project-card">
+            <div class="card">
+                <img src="{{ project.image }}" class="card-img-top" alt="{{ project.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description }}</p>
+                    <a href="{{ project.url }}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

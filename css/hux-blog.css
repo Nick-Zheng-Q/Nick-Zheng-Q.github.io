@@ -1972,3 +1972,54 @@ img::-moz-selection {
 .no-scroll {
   overflow-y: hidden;
 }
+/* Documentation Layout Styles */
+.docs-sidebar {
+  padding: 20px;
+  border-right: 1px solid var(--hr-color);
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.docs-sidebar h4 {
+  color: var(--main-text-color);
+  margin-bottom: 20px;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.docs-sidebar .nav-item {
+  margin-bottom: 5px;
+}
+
+.docs-sidebar .nav-link {
+  color: var(--subtext0-color);
+  padding: 5px 0;
+  font-size: 15px;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.docs-sidebar .nav-link:hover {
+  color: var(--accent-color);
+}
+
+.docs-sidebar .nav-link.active {
+  color: var(--accent-color);
+  background-color: var(--accent-color-background);
+  border-radius: 4px;
+  padding-left: 10px;
+}
+
+.docs-content {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .docs-sidebar {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--hr-color);
+      margin-bottom: 20px;
+  }
+}
