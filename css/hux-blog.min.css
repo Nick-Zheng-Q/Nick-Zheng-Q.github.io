@@ -1770,11 +1770,14 @@ img::-moz-selection {
     padding: 55px 0;
   }
 }
-#tag_cloud {
+#tag_cloud,
+#categories_cloud {
   margin: 20px 0 15px 0;
 }
 #tag_cloud a,
-#tag_cloud .tag {
+#tag_cloud .tag,
+#categories_cloud a,
+#categories_cloud .tag {
   transition-property: all;
   transition-duration: 0.4s;
   transition-timing-function: ease;
@@ -1792,7 +1795,13 @@ img::-moz-selection {
 #tag_cloud a:active,
 #tag_cloud .tag:active,
 #tag_cloud a.focus,
-#tag_cloud .tag.focus {
+#tag_cloud .tag.focus,
+#categories_cloud a:hover,
+#categories_cloud .tag:hover,
+#categories_cloud a:active,
+#categories_cloud .tag:active,
+#categories_cloud a.focus,
+#categories_cloud .tag.focus {
   background-color: var(--accent-color) !important;
 }
 #tag_cloud a.focus,
