@@ -17,18 +17,23 @@ layout: default
                 <div class="category-sidebar">
                     <hr class="hidden-sm hidden-xs">
                     <h5>
-                        <a class="category-toggle" href="#">CATEGORIES</a>
+                        <a class="category-toggle" href="#">CATEGORY</a>
                     </h5>
-                    <ul class="category-nav">
-                        {% assign categories = site.posts | map: "category" | uniq %}
-                        {% for category in categories %}
-                        <li class="category-item {% if page.category == category %}active{% endif %}">
-                            <a href="/categories/{{ category }}">
-                                {{ category }}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    <div class="category-nav">
+                        <div class="current-category">
+                            <h6>{{ page.category }}</h6>
+                            <ul>
+                                <li class="active">{{ page.title }}</li>
+                                {% for post in site.posts %}
+                                    {% if post.category == page.category and post.title != page.title %}
+                                        <li>
+                                            <a href="{{ post.url }}">{{ post.title }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -219,21 +224,45 @@ layout: default
     }
     
     .category-container.collapsed {
-        width: 50px;
+        width: 30px;
     }
     
     .category-nav {
-        list-style: none;
         padding: 0;
+        margin: 0;
     }
     
-    .category-item {
-        padding: 5px 0;
-    }
-    
-    .category-item.active a {
-        color: #337ab7;
+    .current-category h6 {
+        color: var(--accent-color);
         font-weight: bold;
+        margin: 10px 0;
+        font-size: 14px;
+    }
+    
+    .current-category ul {
+        list-style: none;
+        padding-left: 15px;
+        margin: 0;
+    }
+    
+    .current-category li {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+    }
+    
+    .current-category li.active {
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+    
+    .current-category a {
+        color: var(--subtext0-color);
+        text-decoration: none;
+    }
+    
+    .current-category a:hover {
+        color: var(--accent-color);
     }
     
     .category-toggle {
