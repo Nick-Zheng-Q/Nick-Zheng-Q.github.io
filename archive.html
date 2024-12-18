@@ -20,8 +20,8 @@ https://github.com/kitian616/jekyll-TeXt-theme
 			<!-- Categories (as filter) -->
 			<div class="filter-section">
 				<h5>CATEGORIES</h5>
-				<div id='category_cloud' class="categories categories-sup js-categories">
-					<a class="category-button--all" data-encode="">
+				<div id='category_cloud' class="tags tags-sup js-categories">
+					<a class="tag-button--all" data-encode="">
 						Show All
 						<sup>{{site.posts.size}}</sup>
 					</a>
@@ -31,7 +31,7 @@ https://github.com/kitian616/jekyll-TeXt-theme
 						{% assign category_posts = site.posts | where: "category", category %}
 						<a data-sort="{{ site.posts.size | minus: category_posts.size | prepend: '0000' | slice: -4, 4 }}"
 							data-encode="{{ category | strip | url_encode }}" 
-							class="category-button" 
+							class="tag-button" 
 							title="{{ category }}"
 							rel="{{ category_posts.size }}">
 							{{ category }}
