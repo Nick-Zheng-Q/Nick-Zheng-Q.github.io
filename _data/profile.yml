@@ -1,17 +1,17 @@
-primary_name: "Your Name"
+primary_name: "Pingqing Zheng"
 secondary_name: ""
-navbar_name: "Your Name"
+navbar_name: "Nick-Zheng-Q"
 
 positions:
-- logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
-  name: Position 1 with logo
-- name: Position 2 without logo
+- logo: /assets/images/badges/FDU_blue.png  # Logo is optional
+  name: Fudan University
+# - name: Position 2 without logo
 
 
-email: "your@email.com"
+email: "pingqingzheng13@gmail.com"
 # cv_link: link-to-your-cv-file
-gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
-github: your_github_id
+# gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
+github: Nick-Zheng-Q
 twitter: your_twitter_id  # Do not include the '@' symbol
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
@@ -22,29 +22,32 @@ twitter: your_twitter_id  # Do not include the '@' symbol
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    A <a href="https://en.wikipedia.org/wiki/Bicolor_cat" target="_blank">bicolor cat</a> is a cat with white fur combined with fur of some other colour, for example solid black, tabby, or colourpointed.
+    Hi, I am a bachelor student at Fudan University and I am looking for a PhD position now.
   </p>
   <p>
-    There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
-    and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
-    as well as being common in domestic longhair and domestic shorthair cats.
+  My research lies in different aspects of <strong>chip design/computer architecture</strong>, to be specific:
+    <ul>
+      <li>Traditional computer architecture: CPU/GPU</li>
+      <li>Design automation strategies: LLM/HLS/Agile languages</li>
+      <li>Domain specific accelerator: 3DGS/Neuro-symbolic algorithm</li>
+    </ul>
   </p>
 
-portrait_url: /assets/images/photos/portrait.jpg
+portrait_url: /assets/images/photos/Nick-Zheng-Q.jpg
 portrait_caption: >-
-  Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
+  My github icon
 
 education:
-- name: Massachusetts Institute of Technology
-  logo: /assets/images/badges/MIT_Social_circle.png
-  position: >- 
-    Department of Electrical Engineering and Computer Science <br/>
-    Ph.D. Student
-  date: Sep. 2024 - present
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: B.S. in Computer Science
-  date: Sep. 2019 - Jul. 2021
+# - name: Massachusetts Institute of Technology
+#   logo: /assets/images/badges/MIT_Social_circle.png
+#   position: >- 
+#     Department of Electrical Engineering and Computer Science <br/>
+#     Ph.D. Student
+#   date: Sep. 2024 - present
+- name: Fudan University
+  logo: /assets/images/badges/FDU_blue.png
+  position: B.E. in Microelectronics
+  date: Sep. 2021 - Jul. 2025
 
 # experience:
 # - name: Peking University
@@ -53,9 +56,5 @@ education:
 #   date: Sep. 2019 - Jul. 2021
 
 awards:
-- name: Award Name 2
-  date: 2024
-- name: Award Name 1 
-  date: 2021
-- name: A quick brown fox jumps over the lazy dog and runs away award
-  date: 2021
+- name: Second Prize in China Undergraduate Mathematical Contest in Modeling 
+  date: 2023
